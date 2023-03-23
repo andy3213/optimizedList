@@ -260,10 +260,14 @@ export default (Vue as VueConstructor<Vue & {
     selectable (): boolean {
       return ('selectable' in this.$attrs) && (this.$attrs.selectable as unknown) !== false
     },
+    separator (): string {
+      return typeof (this.$attrs.separator !== 'undefined') ? this.$attrs.separator : ','
+    },
     displayValue (): string | TreeNodeKeyType {
       if (this.checkable) {
         if (this.checkedCount === 0 && typeof this.dropPlaceholder === 'string') return this.dropPlaceholder
-        return `已选 ${this.checkedCount} 个`
+        // return `已选 ${this.checkedCount} 个`
+        return this.slotProps.checkedNodes.map((node) => node.title).join(this.separator)
       } else if (this.selectable) {
         if (this.selectedTitle === '' && typeof this.dropPlaceholder === 'string') return this.dropPlaceholder
         return this.selectedTitle

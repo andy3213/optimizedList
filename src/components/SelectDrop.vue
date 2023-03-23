@@ -33,7 +33,7 @@
     </div>
 
     <!-- 下拉框 -->
-    <transition name="ctree-dropdown ctree-select-dropdown">
+    <transition name="ctree-dropdown">
       <div
         ref="dropdown"
         v-show="dropdownVisible"
@@ -111,7 +111,7 @@ export default (Vue as VueConstructor<Vue & {
     treeSearch: CTreeSearchInstanceType,
   },
 }>).extend({
-  name: 'CTreeDrop',
+  name: 'CTreeSelect',
   inheritAttrs: false,
   components: {
     CTreeSearch,
@@ -252,6 +252,7 @@ export default (Vue as VueConstructor<Vue & {
       const extraClassName = Array.isArray(this.dropdownClassName) ? this.dropdownClassName : [this.dropdownClassName]
       return [
         `${prefixCls}__dropdown`,
+        `${selectDropPrefixCls}__dropdown`,
         ...extraClassName,
       ]
     },

@@ -8,13 +8,12 @@ declare const _default: import("vue/types/vue").ExtendedVue<Vue & {
         treeSearch: import("vue/types/vue").CombinedVueInstance<{
             checkAllStatus: {
                 checked: boolean;
-                indeterminate: boolean; /** 多选选中节点个数 */
-                disabled: boolean; /** 单选选中节点名称 */
+                indeterminate: boolean;
+                disabled: boolean;
             };
             isShowingChecked: boolean;
-            /** 展示 slot 的 props */
             keyword: string;
-            debounceTimer: number | undefined; /** 多选选中的节点 key */
+            debounceTimer: number | undefined;
             checkedCount: number;
         } & {
             clearKeyword(): void;
@@ -288,7 +287,6 @@ declare const _default: import("vue/types/vue").ExtendedVue<Vue & {
     dropdownCls: string[];
     checkable: boolean;
     selectable: boolean;
-    separator: string;
     displayValue: TreeNodeKeyType;
     showClearIcon: boolean;
 }, {
