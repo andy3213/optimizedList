@@ -16,7 +16,7 @@
               {{ displayValue }}
             </slot>
           </span>
-          <template v-if="!dropDisabled">
+          <template v-if="!disabled">
             <i :class="dropIconCls"></i>
             <slot
               v-if="clearable && showClearIcon"
@@ -40,6 +40,7 @@
         :class="dropdownCls"
         :style="{
           height: `${dropHeight}px`,
+          ...dropdownStyle
         }"
       >
         <CTreeSearch
@@ -127,12 +128,12 @@ export default (Vue as VueConstructor<Vue & {
     },
 
     /** 展示输入框 placeholder */
-    dropPlaceholder: {
+    placeholder: {
       type: String,
     },
 
     /** 是否禁用 */
-    dropDisabled: {
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -216,13 +217,13 @@ export default (Vue as VueConstructor<Vue & {
         `${prefixCls}__display-input`,
         {
           [`${prefixCls}__display-input_focus`]: this.dropdownVisible,
-          [`${treeSearchPrefixCls}__input_disabled`]: this.dropDisabled,
+          [`${treeSearchPrefixCls}__input_disabled`]: this.disabled,
         },
       ]
     },
     displayInputTextCls (): Array<string | object> {
       let showPlaceholder: boolean = false
-      if (typeof this.dropPlaceholder === 'string') {
+      if (typeof this.placeholder === 'string') {
         if (this.checkable) showPlaceholder = this.checkedCount === 0
         else if (this.selectable) showPlaceholder = this.selectedTitle === ''
       }
@@ -263,15 +264,19 @@ export default (Vue as VueConstructor<Vue & {
     separator (): string {
       return typeof (this.$attrs.separator !== 'undefined') ? this.$attrs.separator : ','
     },
+    dropdownStyle () {
+      if (typeof (this.$attrs.dropdownStyle !== 'undefined')) return this.$attrs.dropdownStyle
+      return {}
+    },
     displayValue (): string | TreeNodeKeyType {
       if (this.checkable) {
-        if (this.checkedCount === 0 && typeof this.dropPlaceholder === 'string') return this.dropPlaceholder
+        if (this.checkedCount === 0 && typeof this.placeholder === 'string') return this.placeholder
         // return `已选 ${this.checkedCount} 个`
         return this.slotProps.checkedNodes.map((node) => node.title).join(this.separator)
       } else if (this.selectable) {
-        if (this.selectedTitle === '' && typeof this.dropPlaceholder === 'string') return this.dropPlaceholder
+        if (this.selectedTitle === '' && typeof this.placeholder === 'string') return this.placeholder
         return this.selectedTitle
-      } else return this.dropPlaceholder || ''
+      } else return this.placeholder || ''
     },
     showClearIcon (): boolean {
       if (this.checkable) return this.checkedCount !== 0
@@ -368,7 +373,7 @@ export default (Vue as VueConstructor<Vue & {
 
     //#region Event handlers
     handleRefClick (): void {
-      if (this.dropDisabled) return
+      if (this.disabled) return
       this.dropdownVisible = !this.dropdownVisible
     },
     handleDocumentClick (e: MouseEvent): void {

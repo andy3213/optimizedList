@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperCls">
     <!-- 搜索、操作区域 -->
-    <div :class="searchCls">
+    <div v-if="!selectable" :class="searchCls">
       <div
         v-if="showCheckAll && checkable"
         :class="checkAllWrapperCls"
@@ -264,6 +264,9 @@ export default (Vue as VueConstructor<Vue & {
     //#endregion Classes
     checkable (): boolean {
       return ('checkable' in this.$attrs) && (this.$attrs.checkable as unknown) !== false
+    },
+    selectable (): boolean {
+      return ('selectable' in this.$attrs) && (this.$attrs.selectable as unknown) !== false
     },
   },
   methods: {
