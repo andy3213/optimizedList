@@ -4,7 +4,7 @@
 
   // TreeSearch
   .@{tree-search-prefix} {
-    @search-height: 42px;
+    @search-height: 2.375rem;
 
     .search-wrapper () {
       // height: @search-height;
@@ -33,19 +33,23 @@
     &__check-all-wrapper {
       .search-wrapper();
       justify-content: initial;
-      width: 40px;
+      width: 2.5rem;
     }
 
     // 全选框
     &__check-all {
-      margin-left: 23px;
+      margin-left: 1.4375rem;
     }
 
     // 搜索框容器
     &__input-wrapper {
       .search-wrapper();
-      padding-left: 5px;
+      padding-left: .3125rem;
       flex: 1;
+      .ctree-tree-search__input{
+        height: 1.75rem;
+        font-size: .75rem;
+      }
     }
 
     // 搜索框
@@ -53,10 +57,10 @@
       color: @ctree-color-content;
       box-sizing: border-box;
       width: 100%;
-      height: 32px;
+      height: 1.875rem;
       border: 1px solid @ctree-color-border;
-      border-radius: 4px;
-      padding: 4px 7px;
+      border-radius: .25rem;
+      padding: 0 .4375rem;
       outline: none;
       transition: border .2s ease-in-out,
                   box-shadow .2s ease-in-out;
@@ -88,7 +92,8 @@
     // 按钮容器
     &__action-wrapper {
       .search-wrapper();
-      padding: 0 10px;
+      padding: 0 .625rem;
+      font-size: 0.75rem;
     }
 
     // 已选按钮
@@ -113,7 +118,7 @@
 
     // 底部信息
     &__footer {
-      padding: 5px;
+      padding: .3125rem;
     }
   }
 }

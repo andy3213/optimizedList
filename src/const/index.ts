@@ -91,6 +91,7 @@ const enum treeSearchApiEnum {
 export const TREE_SEARCH_API_METHODS = [
   'clearKeyword',
   'getKeyword',
+  'setKeyword',
   'search',
 ]
 

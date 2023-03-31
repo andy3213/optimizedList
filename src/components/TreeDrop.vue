@@ -249,10 +249,16 @@ export default (Vue as VueConstructor<Vue & {
     },
     dropdownCls (): string[] {
       const extraClassName = Array.isArray(this.dropdownClassName) ? this.dropdownClassName : [this.dropdownClassName]
-      return [
+      let classes = [
         `${prefixCls}__dropdown`,
-        ...extraClassName,
       ]
+      if ((this.size + '') === 'small') {
+        classes.push(`${prefixCls}-sm__dropdown`)
+      } else if ((this.size + '') === 'large') {
+        classes.push(`${prefixCls}-lg__dropdown`)
+      }
+      classes = [...classes, ...extraClassName]
+      return classes
     },
     //#endregion Classes
     checkable (): boolean {
@@ -263,6 +269,9 @@ export default (Vue as VueConstructor<Vue & {
     },
     separator (): string {
       return typeof (this.$attrs.separator !== 'undefined') ? this.$attrs.separator : ','
+    },
+    size (): string {
+      return typeof (this.$attrs.size !== 'undefined') ? this.$attrs.size : 'default'
     },
     dropdownStyle () {
       if (typeof (this.$attrs.dropdownStyle !== 'undefined')) return this.$attrs.dropdownStyle

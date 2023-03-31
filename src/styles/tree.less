@@ -75,7 +75,7 @@
 
   // Node
   .@{tree-node-prefix} {
-    @base-square-length: 20px;
+    @base-square-length: 1.25rem;
 
     // 容器
     &__wrapper {
@@ -113,9 +113,9 @@
 
     // 展开 icon
     &__expand {
-      @icon-border-width: 5px;
+      @icon-border-width: .3125rem;
       // 展开图标可点击区域大小
-      @icon-clickable-size: 16px;
+      @icon-clickable-size: 1rem;
 
       &::after {
         content: '';
@@ -144,12 +144,12 @@
 
     // Loading icon
     &__loading-icon {
-      #ctree-loading-icon-styles(14px, @ctree-color-content);
+      #ctree-loading-icon-styles(.875rem, @ctree-color-content);
     }
 
     // 复选框
     &__checkbox {
-      @checkbox-size: 14px;
+      @checkbox-size: .875rem;
 
       .active-color () {
         border-color: @ctree-color-primary;
@@ -163,7 +163,7 @@
       position: absolute;
       border: 1px solid;
       border-color: @ctree-color-border;
-      border-radius: 2px;
+      border-radius: .125rem;
       background-color: #fff;
       transition: border-color .2s ease-in-out,
                   background-color .2s ease-in-out,
@@ -177,10 +177,10 @@
         border: 2px solid #fff;
         border-top: 0;
         border-left: 0;
-        width: 4px;
-        height: 8px;
-        top: 1px;
-        left: 4px;
+        width: .25rem;
+        height: .5rem;
+        top: .0625rem;
+        left: .25rem;
         transform: rotate(45deg) scale(0);
         transition: all .2s ease-in-out;
       }
@@ -190,17 +190,17 @@
       }
 
       &:focus {
-        box-shadow: 0 0 0 2px @ctree-color-light-primary;
+        box-shadow: 0 0 0 .125rem @ctree-color-light-primary;
       }
 
       &_checked {
         .active-color();
 
         &::after {
-          width: 4px;
-          height: 8px;
-          top: 1px;
-          left: 4px;
+          width: .25rem;
+          height: .5rem;
+          top: .0625rem;
+          left: .25rem;
           transform: rotate(45deg) scale(1);
         }
 
@@ -213,10 +213,10 @@
         .active-color();
 
         &::after {
-          width: 8px;
-          height: 1px;
-          top: 5px;
-          left: 2px;
+          width: .5rem;
+          height: .0625rem;
+          top: .3125rem;
+          left: .125rem;
           transform: scale(1);
         }
 
@@ -243,9 +243,9 @@
 
     // 标题
     &__title {
-      @title-height: @base-square-length + 6px;
-      @title-margin-left: 5px;
-      @title-padding-left: 5px;
+      @title-height: @base-square-length + .375rem;
+      @title-margin-left: .3125rem;
+      @title-padding-left: .3125rem;
 
       cursor: pointer;
       user-select: none;

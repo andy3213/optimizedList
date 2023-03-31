@@ -250,11 +250,17 @@ export default (Vue as VueConstructor<Vue & {
     },
     dropdownCls (): string[] {
       const extraClassName = Array.isArray(this.dropdownClassName) ? this.dropdownClassName : [this.dropdownClassName]
-      return [
+      let classes = [
         `${prefixCls}__dropdown`,
         `${selectDropPrefixCls}__dropdown`,
-        ...extraClassName,
       ]
+      if ((this.size + '') === 'small') {
+        classes.push(`${prefixCls}-sm__dropdown`)
+      } else if ((this.size + '') === 'large') {
+        classes.push(`${prefixCls}-lg__dropdown`)
+      }
+      classes = [...classes, ...extraClassName]
+      return classes
     },
     //#endregion Classes
     checkable (): boolean {
@@ -262,6 +268,9 @@ export default (Vue as VueConstructor<Vue & {
     },
     selectable (): boolean {
       return ('selectable' in this.$attrs) && (this.$attrs.selectable as unknown) !== false
+    },
+    size (): string {
+      return typeof (this.$attrs.size !== 'undefined') ? this.$attrs.size : 'default'
     },
     displayValue (): string | TreeNodeKeyType {
       if (this.checkable) {

@@ -22,12 +22,13 @@
       &-input {
         position: relative;
         user-select: none;
-        padding-right: 20px;
+        height: 2rem;
+        padding-right: 1.25rem;
 
         &-text {
-          display: block;
+          display: flex;
+          align-items: center;
           height: 100%;
-          line-height: 22px;
         }
 
         &-placeholder {
@@ -42,11 +43,11 @@
 
       // 图标
       &-icon {
-        @icon-size: 14px;
+        @icon-size: .875rem;
         .icon () {
           position: absolute;
-          top: 8px;
-          right: 3px;
+          top: .5rem;
+          right: .25rem;
           width: @icon-size;
           height: @icon-size;
           box-sizing: border-box;
@@ -74,9 +75,9 @@
         &-clear {
           @scale: 0.9;
           .pseudo () {
-            @thick: 1px;
+            @thick: .0625rem;
             @offset: (@icon-size - @thick) / 2;
-            @diff: 7px;
+            @diff: .4375rem;
 
             content: "";
             width: @thick;
@@ -116,10 +117,10 @@
       position: absolute;
       top: -999px;
       left: -999px;
-      box-shadow: 0 1px 6px fade(#000, 20%);
-      border-radius: 4px;
-      margin: 5px 0;
-      padding: 5px 0;
+      box-shadow: 0 1px .375rem fade(#000, 20%);
+      border-radius: .25rem;
+      margin: .3125rem 0;
+      padding: .3125rem 0;
       transform-origin: center top 0px;
       background-color: #fff;
       z-index: 9999;
@@ -128,13 +129,13 @@
         // TreeSearch 搜索区域
         &__search {
           border-bottom: 1px solid @ctree-color-border;
-          padding-bottom: 5px;
-          height: 38px;
+          padding-bottom: .3125rem;
+          height: 2.1875rem;
         }
 
         // TreeSearch 树区域
         &__tree-wrapper {
-          padding-top: 5px;
+          padding-top: .3125rem;
         }
       }
     }

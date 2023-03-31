@@ -283,7 +283,9 @@ export default (Vue as VueConstructor<Vue & {
     getKeyword (): string {
       return this.keyword
     },
-
+    setKeyword (str: string) {
+      this.keyword = str
+    },
     /** 执行搜索 */
     search (keyword?: string): Promise<void> {
       let searchKeyword: string = keyword as string
