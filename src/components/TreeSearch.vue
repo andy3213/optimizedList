@@ -1,7 +1,7 @@
 <template>
   <div :class="wrapperCls">
     <!-- 搜索、操作区域 -->
-    <div v-if="!selectable" :class="searchCls">
+    <div v-if="computedShowSearch" :class="searchCls">
       <div
         v-if="showCheckAll && checkable"
         :class="checkAllWrapperCls"
@@ -268,6 +268,11 @@ export default (Vue as VueConstructor<Vue & {
     selectable (): boolean {
       return ('selectable' in this.$attrs) && (this.$attrs.selectable as unknown) !== false
     },
+    computedShowSearch (): boolean {
+      return true
+      // selectable hide search:
+      // return !this.selectable
+    },
   },
   methods: {
     /** CTree 中的方法 */
@@ -297,11 +302,12 @@ export default (Vue as VueConstructor<Vue & {
         this.debounceTimer = setTimeout(() => {
           if (searchKeyword.length > 0 && searchKeyword.length < this.searchLength) return
           this.isShowingChecked = false
-          this.$emit('search', searchKeyword)
+          // this.$emit('search', searchKeyword, this)
           if (typeof this.searchMethod === 'function') {
             const searchReturnValue: void | Promise<void> = this.searchMethod(searchKeyword)
             Promise.resolve(searchReturnValue).then(() => {
               this.updateCheckAllStatus()
+              this.$emit('search', searchKeyword, this)
               resolve()
             })
           } else {
@@ -309,12 +315,14 @@ export default (Vue as VueConstructor<Vue & {
               // 远程搜索
               this.$refs.tree.loadRootNodes().then(() => {
                 this.updateCheckAllStatus()
+                this.$emit('search', searchKeyword, this)
                 resolve()
               })
             } else {
               // 本地搜索
               this.$refs.tree.filter(searchKeyword)
               this.updateCheckAllStatus()
+              this.$emit('search', searchKeyword, this)
               resolve()
             }
           }

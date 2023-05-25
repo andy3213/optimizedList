@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <div class="tree">
-      <CTree
+      <CTreeSearch
         ref="tree"
+        v-model="value"
         :data="treeData"
         checkable
-        selectable
-      ></CTree>
+      ></CTreeSearch>
     </div>
     <div class="control">
       <div class="desc-block">
-        <p>说明：在 Chrome 下表现良好</p>
+        <p>111说明：在 Chrome 下表现良好</p>
         <p>在火狐浏览器下，因为其异步滚动策略 (scroll-linked) ，在快速滚动时会导致内容空白。</p>
         <p>另：浏览器元素/文档是有最大高度限制的，过多数据会导致显示不正常(Chrome 下 100 万条可以正常显示，但是在火狐或 Edge 则不行)</p>
       </div>
@@ -81,6 +81,7 @@
 
 <script>
 import CTree from '@'
+import { CTreeSearch } from '../src'
 import treeDataGenerator from '../tests/tree-data-generator'
 
 const dataAmountMap = {
@@ -108,9 +109,11 @@ export default {
   name: 'Performance',
   components: {
     CTree,
+    CTreeSearch
   },
   data () {
     return {
+      value: "",
       cache: [],
       isTreeSet: false,
       params: {

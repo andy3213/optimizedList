@@ -9,12 +9,14 @@
       <slot v-bind="slotProps">
         <div :class="displayInputCls">
           <span :class="displayInputTextCls">
-            <slot
-              name="display"
-               v-bind="slotProps"
-            >
-              {{ displayValue }}
-            </slot>
+            <span class="displayInputTextHider">
+              <slot
+                name="display"
+                v-bind="slotProps"
+              >
+                {{ displayValue }}
+              </slot>
+            </span>
           </span>
           <template v-if="!disabled">
             <i :class="dropIconCls"></i>
@@ -169,7 +171,7 @@ export default (Vue as VueConstructor<Vue & {
     /** 固定下拉框容器宽度，当内容超出最小宽度不会伸长，而是出现横向滚动条 */
     dropdownWidthFixed: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   data () {
@@ -277,11 +279,19 @@ export default (Vue as VueConstructor<Vue & {
       if (typeof (this.$attrs.dropdownStyle !== 'undefined')) return this.$attrs.dropdownStyle
       return {}
     },
+    computedTitleField (): string {
+      if (this.$refs.treeSearch && this.$refs.treeSearch.$refs.tree) return this.$refs.treeSearch.$refs.tree.titleField
+      else return ''
+    },
     displayValue (): string | TreeNodeKeyType {
       if (this.checkable) {
         if (this.checkedCount === 0 && typeof this.placeholder === 'string') return this.placeholder
         // return `已选 ${this.checkedCount} 个`
-        return this.slotProps.checkedNodes.map((node) => node.title).join(this.separator)
+        // return this.slotProps.checkedNodes.map((node) => node.title).join(this.separator)
+        return this.slotProps.checkedNodes.map((node) => {
+          if (this.computedTitleField && typeof node[this.computedTitleField] !== 'undefined') return node[this.computedTitleField]
+          else return node.title
+        }).join(this.separator)
       } else if (this.selectable) {
         if (this.selectedTitle === '' && typeof this.placeholder === 'string') return this.placeholder
         return this.selectedTitle

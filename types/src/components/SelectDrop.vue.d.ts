@@ -9,15 +9,16 @@ declare const _default: import("vue/types/vue").ExtendedVue<Vue & {
             checkAllStatus: {
                 checked: boolean;
                 indeterminate: boolean;
-                disabled: boolean;
+                disabled: boolean; /** 多选选中节点个数 */
             };
             isShowingChecked: boolean;
             keyword: string;
             debounceTimer: number | undefined;
-            checkedCount: number;
+            checkedCount: number; /** 多选选中的节点 key */
         } & {
             clearKeyword(): void;
             getKeyword(): string;
+            setKeyword(str: string): void;
             search(keyword?: string | undefined): Promise<void>;
             handleCheckAll(): void;
             handleSearch(): void;
@@ -70,6 +71,8 @@ declare const _default: import("vue/types/vue").ExtendedVue<Vue & {
             treeWrapperCls: string[];
             footerCls: string[];
             checkable: boolean;
+            selectable: boolean;
+            computedShowSearch: boolean;
         } & {
             value: unknown;
             searchPlaceholder: string;
@@ -97,7 +100,7 @@ declare const _default: import("vue/types/vue").ExtendedVue<Vue & {
                     renderStartCache: number;
                     isRootLoading: boolean;
                     valueCache: string | number | TreeNodeKeyType[];
-                    debounceTimer: number | undefined;
+                    debounceTimer: number | undefined; /** CTreeSearch 和 CTree 中的方法 */
                 } & {
                     setData(data: {
                         [key: string]: any;
@@ -287,13 +290,16 @@ declare const _default: import("vue/types/vue").ExtendedVue<Vue & {
     dropdownCls: string[];
     checkable: boolean;
     selectable: boolean;
+    separator: string;
+    size: string;
+    computedTitleField: string;
     displayValue: TreeNodeKeyType;
     showClearIcon: boolean;
 }, {
     value: unknown;
     dropHeight: number;
-    dropPlaceholder: string;
-    dropDisabled: boolean;
+    placeholder: string;
+    disabled: boolean;
     clearable: boolean;
     placement: "top" | "bottom" | "bottom-start" | "bottom-end" | "top-start" | "top-end";
     transfer: boolean;

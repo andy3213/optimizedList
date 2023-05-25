@@ -153,6 +153,7 @@ declare const _default: import("vue/types/vue").ExtendedVue<Vue & {
     clearKeyword(): void;
     /** 获取搜索关键字 */
     getKeyword(): string;
+    setKeyword(str: string): void;
     /** 执行搜索 */
     search(keyword?: string | undefined): Promise<void>;
     /** 处理全选点击 */
@@ -211,6 +212,8 @@ declare const _default: import("vue/types/vue").ExtendedVue<Vue & {
     treeWrapperCls: string[];
     footerCls: string[];
     checkable: boolean;
+    selectable: boolean;
+    computedShowSearch: boolean;
 }, {
     value: unknown;
     searchPlaceholder: string;

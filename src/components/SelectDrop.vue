@@ -9,15 +9,19 @@
       <slot v-bind="slotProps">
         <div :class="displayInputCls">
           <span :class="displayInputTextCls">
-            <slot
-              name="display"
-               v-bind="slotProps"
-            >
-              {{ displayValue }}
-            </slot>
+            <span class="displayInputTextHider">
+              <slot
+                name="display"
+                v-bind="slotProps"
+              >
+                {{ displayValue }}
+              </slot>
+            </span>
           </span>
           <template v-if="!disabled">
-            <i :class="dropIconCls"></i>
+            <i :class="dropIconCls">
+              <svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M461.703529 694.091294c24.094118 35.779765 76.739765 35.779765 100.713412-0.060235 95.533176-142.516706 187.271529-226.063059 326.53553-264.07153a60.656941 60.656941 0 1 0-31.924706-116.976941c-143.239529 39.092706-244.374588 115.290353-337.317647 233.35153L512 556.212706l-7.649882-9.999059C416.105412 434.356706 320.813176 360.207059 189.259294 319.427765l-22.287059-6.445177a60.656941 60.656941 0 1 0-31.924706 116.976941c139.264 38.008471 230.821647 121.374118 326.656 264.131765z"></path></svg>
+            </i>
             <slot
               v-if="clearable && showClearIcon"
               name="clear"
@@ -168,7 +172,7 @@ export default (Vue as VueConstructor<Vue & {
     /** 固定下拉框容器宽度，当内容超出最小宽度不会伸长，而是出现横向滚动条 */
     dropdownWidthFixed: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   data () {
@@ -269,13 +273,24 @@ export default (Vue as VueConstructor<Vue & {
     selectable (): boolean {
       return ('selectable' in this.$attrs) && (this.$attrs.selectable as unknown) !== false
     },
+    separator (): string {
+      return typeof (this.$attrs.separator !== 'undefined') ? this.$attrs.separator : ','
+    },
     size (): string {
       return typeof (this.$attrs.size !== 'undefined') ? this.$attrs.size : 'default'
+    },
+    computedTitleField (): string {
+      if (this.$refs.treeSearch && this.$refs.treeSearch.$refs.tree) return this.$refs.treeSearch.$refs.tree.titleField
+      else return ''
     },
     displayValue (): string | TreeNodeKeyType {
       if (this.checkable) {
         if (this.checkedCount === 0 && typeof this.placeholder === 'string') return this.placeholder
-        return `已选 ${this.checkedCount} 个`
+        // return `已选 ${this.checkedCount} 个`
+        return this.slotProps.checkedNodes.map((node) => {
+          if (this.computedTitleField && typeof node[this.computedTitleField] !== 'undefined') return node[this.computedTitleField]
+          else return node.title
+        }).join(this.separator)
       } else if (this.selectable) {
         if (this.selectedTitle === '' && typeof this.placeholder === 'string') return this.placeholder
         return this.selectedTitle

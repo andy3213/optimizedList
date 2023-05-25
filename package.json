@@ -7,6 +7,7 @@
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "bundle": "vue-cli-service build --target lib --name ctree ./src/index.ts --report",
+    "syncToP1": "vue-cli-service build --target lib --name ctree ./src/index.ts --report && gulp -f ./gulp/gulpfileLocal.js",
     "bundle:docs": "vue-cli-service build --mode docs --dest docs",
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit",
@@ -34,7 +35,9 @@
   ],
   "homepage": "https://github.com/wsfe/ctree",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "gulp": "^4.0.2"
+  },
   "devDependencies": {
     "@types/jest": "^23.1.4",
     "@vue/cli-plugin-babel": "^3.5.1",

@@ -8,17 +8,17 @@ declare const _default: import("vue/types/vue").ExtendedVue<Vue & {
         treeSearch: import("vue/types/vue").CombinedVueInstance<{
             checkAllStatus: {
                 checked: boolean;
-                indeterminate: boolean; /** 多选选中节点个数 */
+                indeterminate: boolean;
                 disabled: boolean; /** 单选选中节点名称 */
             };
-            isShowingChecked: boolean;
-            /** 展示 slot 的 props */
+            isShowingChecked: boolean; /** 展示 slot 的 props */
             keyword: string;
-            debounceTimer: number | undefined; /** 多选选中的节点 key */
+            debounceTimer: number | undefined;
             checkedCount: number;
         } & {
             clearKeyword(): void;
             getKeyword(): string;
+            setKeyword(str: string): void;
             search(keyword?: string | undefined): Promise<void>;
             handleCheckAll(): void;
             handleSearch(): void;
@@ -71,6 +71,8 @@ declare const _default: import("vue/types/vue").ExtendedVue<Vue & {
             treeWrapperCls: string[];
             footerCls: string[];
             checkable: boolean;
+            selectable: boolean;
+            computedShowSearch: boolean;
         } & {
             value: unknown;
             searchPlaceholder: string;
@@ -289,13 +291,16 @@ declare const _default: import("vue/types/vue").ExtendedVue<Vue & {
     checkable: boolean;
     selectable: boolean;
     separator: string;
+    size: string;
+    dropdownStyle: {};
+    computedTitleField: string;
     displayValue: TreeNodeKeyType;
     showClearIcon: boolean;
 }, {
     value: unknown;
     dropHeight: number;
-    dropPlaceholder: string;
-    dropDisabled: boolean;
+    placeholder: string;
+    disabled: boolean;
     clearable: boolean;
     placement: "top" | "bottom" | "bottom-start" | "bottom-end" | "top-start" | "top-end";
     transfer: boolean;

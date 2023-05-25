@@ -117,10 +117,11 @@
       position: absolute;
       top: -999px;
       left: -999px;
+      max-width: 37.5rem;
       box-shadow: 0 1px .375rem fade(#000, 20%);
       border-radius: .25rem;
       margin: .3125rem 0;
-      padding: .3125rem 0;
+      padding: .1875rem 0 0 0;
       transform-origin: center top 0px;
       background-color: #fff;
       z-index: 9999;
@@ -128,14 +129,14 @@
       .@{tree-search-prefix} {
         // TreeSearch 搜索区域
         &__search {
-          border-bottom: 1px solid @ctree-color-border;
-          padding-bottom: .3125rem;
+          // border-bottom: 1px solid @ctree-color-border;
+          // padding-bottom: .3125rem;
           height: 2.1875rem;
         }
 
         // TreeSearch 树区域
         &__tree-wrapper {
-          padding-top: .3125rem;
+          // padding-top: .3125rem;
         }
       }
     }
